@@ -404,26 +404,6 @@ black . && flake8 .
 pytest tests/
 ```
 
----
-
-## 📄 라이선스
-
-이 프로젝트는 MIT 라이선스를 따릅니다. 자세한 내용은 [LICENSE](LICENSE) 파일을 참조하세요.
-
----
-
-## 📞 지원 및 문의
-
-- **문서**: [docs/](docs/) 폴더 참조
-- **이슈 리포트**: GitHub Issues
-- **이메일**: support@feple.com
-
----
-
-## 🎉 마무리
-
-**Feple LightGBM v2.0**으로 상담 품질 분류를 자동화하세요!
-
 ```bash
 # 지금 바로 시작하기
 python setup.py && python main.py
