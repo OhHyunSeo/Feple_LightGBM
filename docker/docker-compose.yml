@@ -1,0 +1,56 @@
+version: '3.8'
+
+services:
+  feple-lightgbm:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: feple-lightgbm-app
+    volumes:
+      # 데이터 폴더 마운트 (호스트와 공유)
+      - ./data:/app/data
+      - ./output:/app/output
+      - ./logs:/app/logs
+      - ./results:/app/results
+      - ./trained_models:/app/trained_models
+      - ./pipeline_results:/app/pipeline_results
+    environment:
+      - PYTHONPATH=/app
+      - LANG=C.UTF-8
+      - LC_ALL=C.UTF-8
+      - PYTHONIOENCODING=utf-8
+    ports:
+      # FastAPI 포트 (필요시)
+      - "8000:8000"
+    restart: unless-stopped
+    stdin_open: true
+    tty: true
+    
+  # 개발용 서비스 (선택사항)
+  feple-lightgbm-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: feple-lightgbm-dev
+    volumes:
+      # 개발시 전체 소스 코드 마운트
+      - .:/app
+      - /app/__pycache__
+      - /app/.git
+    environment:
+      - PYTHONPATH=/app
+      - LANG=C.UTF-8
+      - LC_ALL=C.UTF-8
+      - PYTHONIOENCODING=utf-8
+      - ENVIRONMENT=development
+    ports:
+      - "8001:8000"
+    command: /bin/bash
+    stdin_open: true
+    tty: true
+    profiles:
+      - dev
+
+networks:
+  default:
+    name: feple-lightgbm-network 
